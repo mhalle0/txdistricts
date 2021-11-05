@@ -1,6 +1,8 @@
 width = 960;
 height = 600;
 
+console.log("something outer");
+
 const svg = d3.select("#map1Area")
               .append("svg")
               .attr("width", width)
@@ -8,8 +10,9 @@ const svg = d3.select("#map1Area")
 
 var path = d3.geoPath();
 
-d3.json("./PLANS2100-topo.json", function(error, tx) {
-  if (error) throw error;
+d3.json("./PLANS2100-topo.json").then(function(tx) {
+  
+  console.log("something");
 
   var featureCollection = topojson.feature(tx, tx.objects.PLANS2100)
 
@@ -18,13 +21,13 @@ d3.json("./PLANS2100-topo.json", function(error, tx) {
   var centerX = d3.sum(bounds, function(d) {return d[0];}) / 2,
       centerY = d3.sum(bounds, function(d) {return d[1];}) / 2;
 
-  var projection = d3.geoMercator()
-    .scale(1)
-    .center([centerX, centerY]);
+  // var projection = d3.geoMercator()
+  //   .scale(1000)
+  //   .center([centerX, centerY]);
 
-  // var projection = d3.geoIdentity()
-  //  .reflectY(true)
-  //  .fitSize([width,height],geojsonObject);
+  var projection = d3.geoIdentity()
+   .reflectY(true)
+   .fitSize([width,height], featureCollection);
     
   path.projection(projection);
   
@@ -38,4 +41,7 @@ d3.json("./PLANS2100-topo.json", function(error, tx) {
   svg.append("path")
       .attr("class", "District-borders")
       .attr("d", path(topojson.mesh(tx, tx.objects.PLANS2100, function(a, b) { return a !== b; })));
+      
+}).catch(function(error) { 
+  console.log(error);
 });
