@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "topojson-server": "^3.0.1",
+    "us-atlas": "^3.0.0"
+  }
+}
