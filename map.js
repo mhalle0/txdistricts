@@ -8,7 +8,7 @@ const svg = d3.select("#map1Area")
               .attr("width", width)
               .attr("height", height);
 
-var path = d3.geoPath();
+var path = d3.geoPath().projection(null);
 
 d3.json("./PLANS2100-topo.json").then(function(tx) {
   
@@ -38,10 +38,6 @@ d3.json("./PLANS2100-topo.json").then(function(tx) {
     .enter().append("path")
       .attr("d", path);
 
-  svg.append("path")
-      .attr("class", "District-borders")
-      .attr("d", path(topojson.mesh(tx, tx.objects.PLANS2100, function(a, b) { return a !== b; })));
-      
 }).catch(function(error) { 
   console.log(error);
 });
