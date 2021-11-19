@@ -1,7 +1,5 @@
-width = 960;
-height = 600;
-
-console.log("something outer");
+var width = document.getElementById('map1Area').clientWidth;
+var height = width;
 
 const svg = d3.select("#map1Area")
               .append("svg")
@@ -11,19 +9,13 @@ const svg = d3.select("#map1Area")
 var path = d3.geoPath().projection(null);
 
 d3.json("./PLANS2100-topo.json").then(function(tx) {
-  
-  console.log("something");
-
+   
   var featureCollection = topojson.feature(tx, tx.objects.PLANS2100)
 
   var bounds = d3.geoBounds(featureCollection);
   
   var centerX = d3.sum(bounds, function(d) {return d[0];}) / 2,
       centerY = d3.sum(bounds, function(d) {return d[1];}) / 2;
-
-  // var projection = d3.geoMercator()
-  //   .scale(1000)
-  //   .center([centerX, centerY]);
 
   var projection = d3.geoIdentity()
    .reflectY(true)
