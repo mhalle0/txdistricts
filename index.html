@@ -5,31 +5,32 @@
 </head>
 <body>
 
-  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom-0 mb-4">
     <div class="container-fluid">
-      <a class="navbar-brand" href="#">Texas State Senate</a>
+      <a class="navbar-brand mx-3" href="#">Texas State Senate</a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="#">2010s</a>
+            <a class="nav-link active" aria-current="page" href="#">2010 Census Districts</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" aria-current="page" href="#">2020s</a>
+            <a class="nav-link" aria-current="page" href="#">2020 Census Districts</a>
           </li>
         </ul>
       </div>
     </div>
   </nav>
+  <span class="border-bottom border-dark"></span>
 
   <div>
-    <div class="row">
+    <div class="row mx-4">
       <div class="col map-panel" id="map1Panel">
         <p class="h6 text-center mx-auto mt-2 w-75">
           <small class="text-muted float-start">D</small>
-          Representatives
+          Representatives (2020)
           <small class="text-muted float-end">R</small>
         </p>
         <div class="progress w-75 mx-auto mb-4 mt-2">
@@ -38,7 +39,43 @@
         </div>
         <div class="mx-auto w-75" id="map1Area"></div>
       </div>
-    <div class="col" id="map2Panel"></div>
+      <div class="col-3">
+        <div class="card">
+          <div class="card-header text-center">
+            State Totals
+          </div>
+          <div class="card-body">
+            <p class="card-title text-center">2018 & 2020 Election Results</p>
+            <table class="table table-sm">
+              <thead>
+                <tr>
+                  <th scope="col">Party</th>
+                  <th scope="col">Votes</th>
+                  <th scope="col">%</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th scope="row">Republican</th>
+                  <td>653,203</td>
+                  <td>57%</td>
+                </tr>
+                <tr>
+                  <th scope="row">Democratic</th>
+                  <td>489,502</td>
+                  <td>40%</td>
+                </tr>
+                <tr>
+                  <th scope="row">Libertarian</th>
+                  <td>56,029</td>
+                  <td>2%</td>
+                </tr>
+              </tbody>
+            </table>
+        </div>
+      </div>
+      <div class="col-3"></div>
+      </div>
     </div>
   </div>
 
@@ -48,6 +85,7 @@
   <script src="https://d3js.org/d3.v7.min.js"></script>
   <script src="https://d3js.org/topojson.v2.min.js"></script>
 
+  <script type="text/javascript" src="./district-summaries.js"></script>
   <script type="text/javascript" src="./map.js"></script>
 
 </body>

@@ -1,3 +1,5 @@
+var incrementMap1 = 0;
+
 var width = document.getElementById('map1Area').clientWidth;
 var height = width;
 
@@ -28,8 +30,17 @@ d3.json("./PLANS2100-topo.json").then(function(tx) {
     .selectAll("path")
     .data(featureCollection.features)
     .enter().append("path")
-      .attr("d", path);
+      .attr("d", path)
+      .attr("id", function() {
+        incrementMap1 += 1;
+        return "M1-" + (incrementMap1).toString(); 
+      })
+      .style("fill", function () {
+        var match = ds.find(elem => elem.id == this.id);
+        return match.shade();
+      });
 
 }).catch(function(error) { 
   console.log(error);
 });
+
