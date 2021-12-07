@@ -1,7 +1,8 @@
 import * as d3 from "d3";
-import { d3tip, d3functor } from "./d3-tip.js";
 import * as topojson from "topojson-client";
 import * as districts from "./district-summaries";
+import { tip as d3tip } from "d3-v6-tip";
+const tip = d3tip();
 
 let map1width = document.getElementById('map1Area').clientWidth;
 let map1height = map1width;
@@ -45,11 +46,10 @@ function drawMap(canvas: d3.Selection<SVGSVGElement, unknown, HTMLElement, any>,
             /* @ts-ignore */
             return shadeDistrict(d.properties.District, "party", false);
           })
-          .on("mouseover", function(d) {
-            return shadeDistrict(d.target.__data__.properties.District, "party", true);
-          })
-          .on("mouseout", function(d) {
-            return shadeDistrict(d.target.__data__.properties.District, "party", false);
+          .on("mouseover", dstip.show)
+          .on("mouseout", function(d) { 
+            dstip.hide(d);
+            shadeDistrict(d.target.__data__.properties.District, "party", false); 
           })
 }
 
@@ -81,15 +81,16 @@ function shadeDistrict(district: string, mode: string, highlight: boolean): void
 }
 
 /* @ts-ignore */
-let districtTip = d3tip().attr('class', 'd3-tip').html(function(d) { return d; }) 
-                         .offset([-5, 0]) 
+var dstip = tip.attr('class', 'd3-tip').html(function(d) { return d; }) 
+                         .offset([-3, 0]) 
                          .html(function(d: any) {
                            let district = d.target.__data__.properties.District;
+                           shadeDistrict(district, "party", true);
                            let dsm = matchDistrict(district);
                            return `District ${district}<br>
-                                   Sen. ${dsm.rep} (${dsm.displayParty("short")})<br>
+                                   ${dsm.rep} (${dsm.displayParty("short")})<br>
                                    ${dsm.displayParty("long")} +${dsm.victory()}`
                           });
 
 drawMap(map1svg, PLANS2100, 2100);
-map1svg.call(districtTip);
+map1svg.call(dstip);
