@@ -1,0 +1,9 @@
+{
+  "extends": "stylelint-config-standard",
+  "rules": {
+    "color-hex-length": null,
+    "max-line-length": null,
+    "no-missing-end-of-source-newline": null,
+    "comment-empty-line-before": null
+  }
+}
