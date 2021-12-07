@@ -11,6 +11,7 @@ let map2width = 2;
 let map2height = map1width;
 
 const PLANS2100 = require('./topo/PLANS2100.json');
+// const PLANS2168 = require('./topo/PLANS2168.json');
 const map1svg = d3.select("#map1Area")
                   .append("svg")
                   .attr("width", map1width)
